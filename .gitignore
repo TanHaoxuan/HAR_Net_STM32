@@ -1,0 +1,58 @@
+###############################################################################
+# Build outputs (object files, generated binaries, etc.)
+###############################################################################
+# If your build output folder is named "Debug" or "Release," ignore them:
+Debug/
+Release/
+
+# Object and dependency files
+*.o
+*.d
+*.su
+*.dep
+*.lst
+
+# Executables and other build artifacts
+*.elf
+*.map
+*.bin
+*.hex
+*.srec
+*.axf
+
+###############################################################################
+# Eclipse/STM32CubeIDE project metadata
+###############################################################################
+# Eclipse settings folder
+.settings/
+# Eclipse project configuration files
+.project
+.cproject
+# Launch configurations
+*.launch
+
+###############################################################################
+# STM32CubeMX artifacts
+###############################################################################
+# These are optional; some teams commit .mxproject/.ioc to preserve config.
+# If you do NOT want them in version control, uncomment:
+# *.ioc
+# *.mxproject
+
+###############################################################################
+# Operating-system or toolchain caches
+###############################################################################
+# macOS Finder files
+.DS_Store
+# Windows thumbnail/cache files
+Thumbs.db
+# Vim swap files, etc.
+*.swp
+*.swo
+*.swd
+
+###############################################################################
+# Additional folders or files as needed
+###############################################################################
+# Example: ignoring the entire build folder if it’s named "build/"
+# build/
