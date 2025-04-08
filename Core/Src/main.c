@@ -1,3 +1,9 @@
+/* Includes ------------------------------------------------------------------
+	Group 16
+	Tan Haoxuan A0223893X
+	Ma Xudong A0211223A
+*/
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "usb_device.h"
@@ -229,15 +235,11 @@ int SelectFIFO(SelectionScheme scheme) {
 
 void ProcessFIFOItem(int sensor) {
     SensorFIFOEntry entry;
-    char msg[80];
     if(FIFO_Dequeue(&fifo[sensor], &entry)) {
+        char msg[80];
         sprintf(msg, "FIFO Process: %s = %.2f %s at %lu ms\r\n",
                 SENSOR_NAMES[sensor], entry.value, SENSOR_UNITS[sensor], entry.timestamp);
         HAL_UART_Transmit(&huart1, (uint8_t*)msg, strlen(msg), 100);
-    }
-    else{
-		sprintf(msg, "FIFO Full:  %s, drop data. \r\n", SENSOR_NAMES[sensor]);
-		HAL_UART_Transmit(&huart1, (uint8_t*)msg, strlen(msg), 100);
     }
 }
 
@@ -408,11 +410,8 @@ int main(void)
 
 	lowpClock = HAL_GetTick();
 
-	/** Choose a FIFO selection scheme
-    SELECTION_RANDOM,
-    SELECTION_FULL_BUFFER,
-    SELECTION_PREDICTIVE*/
-	SelectionScheme currentScheme = SELECTION_FULL_BUFFER;
+	/* Choose a FIFO selection scheme */
+	SelectionScheme currentScheme = SELECTION_RANDOM;
 	char msg[80];
 	sprintf(msg, "Init DONE\r\n");
 	HAL_UART_Transmit(&huart1, (uint8_t*)msg, strlen(msg), 0xFFFF);
@@ -941,7 +940,7 @@ static void MEMS_Init(void)
 	LSM6DSL_Init(&MotionSensor);
 
 	/* Configure the accelerometer */
-	LSM6DSL_ACC_SetOutputDataRate(&MotionSensor, 1.0f);  /* 26 Hz */
+	LSM6DSL_ACC_SetOutputDataRate(&MotionSensor, 200.0f);  /* Hz */
 	LSM6DSL_ACC_SetFullScale(&MotionSensor, 4);           /* ±4g */
 	LSM6DSL_ACC_Set_INT1_DRDY(&MotionSensor, ENABLE);     /* Enable DRDY */
 	LSM6DSL_ACC_GetAxesRaw(&MotionSensor, &axes);         /* Clear DRDY */
